@@ -2,6 +2,8 @@ import { Dialog , Box , Typography, List, ListItem,styled } from "@mui/material"
 import { qrCodeImage } from "../../constants/data";
 import {GoogleLogin} from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
+import { useContext } from "react";
+import { AccountContext } from "../../context/AccountProvider";
 
 const Component=styled(Box)`
 display:flex
@@ -47,9 +49,14 @@ const dialogStyle={
 
 const LoginDialog=()=>{
 
+
+const {setAccount} = useContext(AccountContext);
+
+
  const onLoginSuccess=(res)=>{
     const decoded=jwt_decode(res.credential);
-    console.log(decoded);
+    // console.log(decoded);
+    setAccount(decoded);
  }
 
  const onLoginError=(res)=>{
@@ -59,6 +66,7 @@ const LoginDialog=()=>{
   return(
     <Dialog open={true}
     PaperProps={{sx:dialogStyle}}
+    hideBackdrop={true}
     >
       <Component>
         <Container>
@@ -71,7 +79,7 @@ const LoginDialog=()=>{
         </Container>
         <Box style={{position:'relative'}}>
           <QRcode src={qrCodeImage} alt="qr-code"></QRcode>
-          <Box style={{position:'absolute',top:'50%',transform:'translateX(41%)'}}>
+          <Box style={{position:'absolute',top:'50%',transform:'translateX(18%)'}}>
             <GoogleLogin
                onSuccess={onLoginSuccess}
                onError={onLoginError}
