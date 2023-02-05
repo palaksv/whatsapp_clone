@@ -55,7 +55,7 @@ const {setAccount} = useContext(AccountContext);
 
  const onLoginSuccess=(res)=>{
     const decoded=jwt_decode(res.credential);
-    // console.log(decoded);
+    console.log(decoded);
     setAccount(decoded);
  }
 
