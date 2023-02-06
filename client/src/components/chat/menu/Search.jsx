@@ -26,7 +26,7 @@ border-radius:8px
 const Icon=styled(Box)`
 position:absolute;
 height:100%;
-padding:6px;
+padding:3px 8px;
 color:#858585;
 `
 
@@ -47,7 +47,9 @@ const Search=()=>{
 <Component>
     <Wrapper>
         <Icon>
-            <SearchIcon/>
+            <SearchIcon
+            fontSize='small'
+            />
         </Icon>
         <Input
         placeholder='Search or start a new chat'
