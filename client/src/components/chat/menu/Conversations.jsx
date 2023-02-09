@@ -1,11 +1,26 @@
 //to call api as soon as componnet is loaded -->  useEffect
-import { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { useEffect, useState, useContext } from "react";
+import { Box, styled, Divider } from "@mui/material";
 import { getUsers } from "../../../service/api.js";
 import Conversation from "./Conversation.jsx";
+import { AccountContext } from "../../../context/AccountProvider";
+
+const Component = styled(Box)`
+  height: 81vh;
+  overflow: overlay;
+`;
+
+const StyledDivider=styled(Divider)`
+
+margin: 0 0 0 80px;
+background:#e9edef;
+opacity:0.6;
+`
 
 const Conversations = () => {
   const [users, setUsers] = useState([]);
+
+  const { account } = useContext(AccountContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,14 +31,20 @@ const Conversations = () => {
   }, []);
 
   return (
-    <Box>
+    <Component>
       {
         //loop the users array
-        users.map(user=>(
-            <Conversation/>
-        ))
+        users.map(
+          (user) =>
+            user.sub !== account.sub && (
+              <>
+                <Conversation user={user} />
+                <StyledDivider />
+              </>
+            )
+        )
       }
-    </Box>
+    </Component>
   );
 };
 
