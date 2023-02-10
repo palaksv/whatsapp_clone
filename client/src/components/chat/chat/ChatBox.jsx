@@ -1,11 +1,13 @@
 import { Box } from "@mui/material";
-
+import ChatHeader from "./ChatHeader";
+import Messages from "./Messages";
 
 const ChatBox=()=>{
     return(
-        <>
-        hello
-        </>
+       <Box>
+            <ChatHeader/>
+            <Messages/>
+       </Box>
     )
 }
 

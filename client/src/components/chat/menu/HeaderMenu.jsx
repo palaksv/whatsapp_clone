@@ -12,10 +12,10 @@ padding:10px 25px 5px 24px
 
 
 const HeaderMenu = ({setopenDrawer}) => {
-  const [open, setopen] = useState(null);
+  const [open, setopen] = useState(false);
 
   const handleClose = () => {
-    setopen(null);
+    setopen(false);
   };
   const handleClick = (e) => {
     setopen(e.currentTarget);
