@@ -6,10 +6,13 @@ const AccountProvider = ({children}) => {
 //forwarding the children
 
     const [account,setAccount]=useState();
+    const [person,setPerson]=useState({});
   return(
     <AccountContext.Provider value={{
  account,
- setAccount
+ setAccount,
+ person,
+ setPerson
     }}>
         {children}     
         

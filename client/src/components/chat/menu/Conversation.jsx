@@ -1,5 +1,6 @@
 import { Box, Typography, styled } from "@mui/material";
-
+import { useContext } from "react";
+import { AccountContext } from "../../../context/AccountProvider";
 
 const Container=styled(Box)`
 display:flex;
@@ -29,9 +30,17 @@ margin:10px 20px 10px 20px
 `
 
 const Conversation = ({ user }) => {
+
+
+const {setPerson}=useContext(AccountContext);
+
+const getUser=()=>{
+setPerson(user);
+}
+
   return (
     <>
-      <Container>
+      <Container onClick={()=>getUser()}>
         <ImageContainer>
           <Image src={user.picture} alt="dp" />
         </ImageContainer>

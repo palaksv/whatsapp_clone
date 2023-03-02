@@ -5,7 +5,7 @@ import { Search, MoreVert } from "@mui/icons-material";
 import { defaultProfilePicture } from "../../../constants/data";
 
 const Header=styled(Box)`
-height:44px;
+height:50px;
 background:#ededed;
 display:flex;
 align-items:center;
@@ -33,17 +33,21 @@ color:rgba(0,0,0,0.6);
 
 const RightContainer=styled(Box)`
 margin-left:auto;
-
+& > svg{
+    padding:8px;
+    font-size:20px;
+    color:#000;
+}
 
 `
 
-const ChatHeader = () => {
+const ChatHeader = ({person}) => {
   return (
     <Header>
-      <Image src={defaultProfilePicture} alt="dp" />
+      <Image src={person.picture} alt="dp" />
       <Box>
-        <Name>name</Name>
-        <Status>online</Status>
+        <Name>{person.name}</Name>
+        <Status>offline</Status>
       </Box>
       <RightContainer>
         <Search />
