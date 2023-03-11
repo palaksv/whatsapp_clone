@@ -34,13 +34,19 @@ const ClipIcon = styled(AttachFileIcon)`
   transform: rotate(40deg);
 `;
 
-const Footer = () => {
+const Footer = ({sendText,setValue}) => {
+
+  // const [value,setValue]=useState('');           //
+
   return (
     <Container>
       <InsertEmoticonIcon />
       <ClipIcon />
       <Search>
-        <InputField placeholder="Type a message" />
+        <InputField placeholder="Type a message" 
+        onChange={(e)=>setValue(e.target.value)}
+        onKeyPress={(e)=>sendText(e)}
+        />
       </Search>
       <MicIcon />
     </Container>

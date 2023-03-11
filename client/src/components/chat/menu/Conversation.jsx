@@ -1,5 +1,6 @@
 import { Box, Typography, styled } from "@mui/material";
 import { useContext } from "react";
+import { setConversation } from "../../../service/api.js";
 import { AccountContext } from "../../../context/AccountProvider";
 
 const Container=styled(Box)`
@@ -32,10 +33,11 @@ margin:10px 20px 10px 20px
 const Conversation = ({ user }) => {
 
 
-const {setPerson}=useContext(AccountContext);
+const {setPerson,account}=useContext(AccountContext);
 
-const getUser=()=>{
+const getUser= async()=>{
 setPerson(user);
+await setConversation({senderId : account.sub , receiverId : user.sub  })
 }
 
   return (
