@@ -2,9 +2,11 @@ import { Box, InputBase, styled } from "@mui/material";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import MicIcon from "@mui/icons-material/Mic";
+import { uploadFile } from "../../../service/api";
+import { useEffect } from "react";
 
 const Container = styled(Box)`
-  height: 52px;
+  height: 55px;
   background: #ededed;
   display: flex;
   width: 100%;
@@ -34,18 +36,48 @@ const ClipIcon = styled(AttachFileIcon)`
   transform: rotate(40deg);
 `;
 
-const Footer = ({sendText,setValue}) => {
+const Footer = ({sendText,setValue,value,file,setFile,setImage}) => {
 
-  // const [value,setValue]=useState('');           //
+
+useEffect(()=>{
+const getImage=async()=>{
+  if(file){
+       const data=new FormData();
+       data.append("name",file.name);
+       data.append("file",file);
+
+       let response=await uploadFile(data);
+       setImage(response.data)
+  }
+}
+getImage();
+},[file])
+
+ 
+const onFileChange=(e)=>{
+   console.log(e);
+   setFile(e.target.files[0]);
+   setValue(e.target.files[0].name);
+}
+
 
   return (
     <Container>
       <InsertEmoticonIcon />
+      <label htmlFor="fileInput" >
       <ClipIcon />
+      </label>
+      
+      <input type="file"
+       id="fileInput"
+       style={{display:'none'}}
+       onChange={(e)=>onFileChange(e)}
+      />
       <Search>
         <InputField placeholder="Type a message" 
         onChange={(e)=>setValue(e.target.value)}
         onKeyPress={(e)=>sendText(e)}
+        value={value}
         />
       </Search>
       <MicIcon />
